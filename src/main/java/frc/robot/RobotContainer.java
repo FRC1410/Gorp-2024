@@ -7,7 +7,7 @@ package frc.robot;
 
 public class RobotContainer {
 
-    // Test (the other one didint work)
+    // Test (This one should work!!)
 
     public RobotContainer() {
         configureBindings();
