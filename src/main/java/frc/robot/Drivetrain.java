@@ -2,10 +2,11 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
-public class Drivetrain {
+public class Drivetrain extends SubsystemBase {
 
     private final WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(LEFT_FRONT_ID);
     private final WPI_TalonSRX leftBackMotor = new WPI_TalonSRX(LEFT_BACK_ID);
@@ -22,8 +23,8 @@ public class Drivetrain {
     }
 
     public void tankDrive(double leftStickY, double rightStickX, double leftTrigger, double rightTrigger) {
-        getDifferentialDrive().tankDrive(leftStickY, 0.0 - rightStickX);
+            getDifferentialDrive().tankDrive(leftStickY, 0.0 - rightStickX);
 
 
     }
-    }
+}
