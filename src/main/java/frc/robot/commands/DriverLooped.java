@@ -1,21 +1,22 @@
-package frc.robot;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Drivetrain;
+import frc.robot.subsystems.Drivetrain;
 
 
-public class DriverLoopedCommand extends CommandBase {
+public class DriverLooped extends Command {
 
     private final Drivetrain drivetrain;
     private final XboxController driverController;
+    double leftStickY;
+    double rightStickY;
    
 
-    public DriverLoopedCommand(Drivetrain drivetrain, XboxController driverController) {
+    public DriverLooped(Drivetrain drivetrain, XboxController driverController) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        this.drivetrain = new Drivetrain();
+        this.drivetrain = drivetrain;
         this.driverController = driverController;
         addRequirements();
     }
@@ -26,6 +27,9 @@ public class DriverLoopedCommand extends CommandBase {
     @Override
     public void initialize() {
 
+        //Drivetrain
+         leftStickY = driverController.getRawAxis(XboxController.Axis.kLeftY.value);
+         rightStickY = driverController.getRawAxis(XboxController.Axis.kRightY.value);
     }
 
     /**
@@ -34,11 +38,7 @@ public class DriverLoopedCommand extends CommandBase {
      */
     @Override
     public void execute() {
-
-        //Drivetrain
-        double leftStickY = driverController.getRawAxis(XboxController.Axis.kLeftY.value);
-        double rightStickY = driverController.getRawAxis(XboxController.Axis.kRightY.value);
-
+    this.drivetrain.tankDrive(leftStickY, rightStickY);
 
 
     }
@@ -74,5 +74,6 @@ public class DriverLoopedCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
 
+        this.drivetrain.tankDrive(0, 0);
     }
 }
