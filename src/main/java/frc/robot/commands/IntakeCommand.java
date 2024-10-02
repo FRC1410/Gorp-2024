@@ -2,22 +2,24 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
+
+import static frc.robot.Constants.OPERATOR_CONTROLLER;
 
 
-public class DriverLooped extends Command {
+public class IntakeCommand extends Command {
 
-    private final Drivetrain drivetrain;
-    private final XboxController driverController;
-    double leftStickY;
-    double rightStickY;
-   
+    private final Shooter shooter;
+    private final XboxController controller;
+    private double rightTrigger;
 
-    public DriverLooped(Drivetrain drivetrain, XboxController driverController) {
+
+    public IntakeCommand(XboxController controller, Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        this.drivetrain = drivetrain;
-        this.driverController = driverController;
+        this.shooter = new Shooter();
+        this.controller = controller;
         addRequirements();
     }
 
@@ -26,12 +28,8 @@ public class DriverLooped extends Command {
      */
     @Override
     public void initialize() {
-
-        //Drivetrain
-         leftStickY = driverController.getRawAxis(XboxController.Axis.kLeftY.value);
-         rightStickY = driverController.getRawAxis(XboxController.Axis.kRightY.value);
+        rightTrigger = controller.getRawAxis(XboxController.Axis.kRightTrigger.value);
     }
-    
 
     /**
      * The main body of a command.  Called repeatedly while the command is scheduled.
@@ -39,9 +37,7 @@ public class DriverLooped extends Command {
      */
     @Override
     public void execute() {
-        this.drivetrain.tankDrive(leftStickY, rightStickY);
-
-
+        this.shooter.runShooter(-(rightTrigger),-(rightTrigger));
     }
 
     /**
@@ -74,7 +70,6 @@ public class DriverLooped extends Command {
      */
     @Override
     public void end(boolean interrupted) {
-
-        this.drivetrain.tankDrive(0, 0);
+        this.shooter.runShooter(0,0);
     }
 }
