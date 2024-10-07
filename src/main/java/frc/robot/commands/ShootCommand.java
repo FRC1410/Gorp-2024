@@ -4,20 +4,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
 
+import static frc.robot.Constants.SHOOTER_CONSTANT;
+
 
 public class ShootCommand extends Command {
 
     private final Shooter shooter;
-    private final XboxController controller;
 
-    private double leftTrigger;
-
-    public ShootCommand(Shooter shooter, XboxController controller) {
+    public ShootCommand(Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
 
         this.shooter = shooter;
-        this.controller = controller;
         addRequirements();
     }
 
@@ -26,7 +24,7 @@ public class ShootCommand extends Command {
      */
     @Override
     public void initialize() {
-        leftTrigger = controller.getRawAxis(XboxController.Axis.kLeftTrigger.value);
+
     }
 
     /**
@@ -35,7 +33,7 @@ public class ShootCommand extends Command {
      */
     @Override
     public void execute() {
-        this.shooter.runShooter(leftTrigger);
+        this.shooter.shooterSpeed(SHOOTER_CONSTANT);
     }
 
     /**
@@ -68,6 +66,6 @@ public class ShootCommand extends Command {
      */
     @Override
     public void end(boolean interrupted) {
-        this.shooter.runShooter(0);
+        this.shooter.shooterSpeed(0);
     }
 }

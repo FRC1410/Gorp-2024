@@ -8,16 +8,16 @@ import frc.robot.subsystems.Drivetrain;
 public class DriverLooped extends Command {
 
     private final Drivetrain drivetrain;
-    private final XboxController driverController;
+    private final XboxController controller;
     double leftStickY;
     double rightStickY;
    
 
-    public DriverLooped(Drivetrain drivetrain, XboxController driverController) {
+    public DriverLooped(Drivetrain drivetrain, XboxController controller) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         this.drivetrain = drivetrain;
-        this.driverController = driverController;
+        this.controller = controller;
         addRequirements();
     }
 
@@ -26,13 +26,9 @@ public class DriverLooped extends Command {
      */
     @Override
     public void initialize() {
-
-        //Drivetrain
-         leftStickY = driverController.getRawAxis(XboxController.Axis.kLeftY.value);
-         rightStickY = driverController.getRawAxis(XboxController.Axis.kRightY.value);
+    leftStickY = controller.getLeftY();
+    rightStickY = controller.getRightY();
     }
-    
-
     /**
      * The main body of a command.  Called repeatedly while the command is scheduled.
      * (That is, it is called repeatedly until {@link #isFinished()}) returns true.)

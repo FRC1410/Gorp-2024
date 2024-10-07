@@ -5,21 +5,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;
 
-import static frc.robot.Constants.OPERATOR_CONTROLLER;
+import static frc.robot.Constants.*;
 
 
 public class IntakeCommand extends Command {
 
     private final Shooter shooter;
-    private final XboxController controller;
-    private double rightTrigger;
 
 
-    public IntakeCommand(XboxController controller, Shooter shooter) {
+
+    public IntakeCommand( Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         this.shooter = shooter;
-        this.controller = controller;
         addRequirements();
     }
 
@@ -28,7 +26,7 @@ public class IntakeCommand extends Command {
      */
     @Override
     public void initialize() {
-        rightTrigger = controller.getRawAxis(XboxController.Axis.kRightTrigger.value);
+
     }
 
     /**
@@ -37,7 +35,7 @@ public class IntakeCommand extends Command {
      */
     @Override
     public void execute() {
-        this.shooter.runShooter(-(rightTrigger));
+        this.shooter.shooterSpeed(INTAKE_CONSTANT);
     }
 
     /**
@@ -70,6 +68,6 @@ public class IntakeCommand extends Command {
      */
     @Override
     public void end(boolean interrupted) {
-        this.shooter.runShooter(0);
+        this.shooter.shooterSpeed(0);
     }
 }

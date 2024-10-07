@@ -15,7 +15,7 @@ public class Shooter {
         bottomShooter.follow(topShooter);
     }
 
-    public void runShooter(double topShooterSpeed){
+    public void shooterSpeed(double topShooterSpeed){
         topShooter.set(topShooterSpeed);
 
     }
