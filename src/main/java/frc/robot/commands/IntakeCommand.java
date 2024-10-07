@@ -18,7 +18,7 @@ public class IntakeCommand extends Command {
     public IntakeCommand(XboxController controller, Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        this.shooter = new Shooter();
+        this.shooter = shooter;
         this.controller = controller;
         addRequirements();
     }
@@ -37,7 +37,7 @@ public class IntakeCommand extends Command {
      */
     @Override
     public void execute() {
-        this.shooter.runShooter(-(rightTrigger),-(rightTrigger));
+        this.shooter.runShooter(-(rightTrigger));
     }
 
     /**
@@ -70,6 +70,6 @@ public class IntakeCommand extends Command {
      */
     @Override
     public void end(boolean interrupted) {
-        this.shooter.runShooter(0,0);
+        this.shooter.runShooter(0);
     }
 }
