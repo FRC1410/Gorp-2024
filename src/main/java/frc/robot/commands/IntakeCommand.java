@@ -14,7 +14,7 @@ public class IntakeCommand extends Command {
 
 
 
-    public IntakeCommand( Shooter shooter) {
+    public IntakeCommand(Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         this.shooter = shooter;
