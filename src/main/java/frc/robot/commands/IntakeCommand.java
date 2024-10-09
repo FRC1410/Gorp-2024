@@ -2,22 +2,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
+
+import static frc.robot.Constants.*;
 
 
-public class DriverLooped extends Command {
+public class IntakeCommand extends Command {
 
-    private final Drivetrain drivetrain;
-    private final XboxController controller;
-    double leftStickY;
-    double rightStickY;
-   
+    private final Shooter shooter;
 
-    public DriverLooped(Drivetrain drivetrain, XboxController controller) {
+
+
+    public IntakeCommand(Shooter shooter) {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        this.drivetrain = drivetrain;
-        this.controller = controller;
+        this.shooter = shooter;
         addRequirements();
     }
 
@@ -26,18 +26,16 @@ public class DriverLooped extends Command {
      */
     @Override
     public void initialize() {
-    leftStickY = controller.getLeftY();
-    rightStickY = controller.getRightY();
+
     }
+
     /**
      * The main body of a command.  Called repeatedly while the command is scheduled.
      * (That is, it is called repeatedly until {@link #isFinished()}) returns true.)
      */
     @Override
     public void execute() {
-        this.drivetrain.tankDrive(leftStickY, rightStickY);
-
-
+        this.shooter.shooterSpeed(INTAKE_CONSTANT);
     }
 
     /**
@@ -70,7 +68,6 @@ public class DriverLooped extends Command {
      */
     @Override
     public void end(boolean interrupted) {
-
-        this.drivetrain.tankDrive(0, 0);
+        this.shooter.shooterSpeed(0);
     }
 }

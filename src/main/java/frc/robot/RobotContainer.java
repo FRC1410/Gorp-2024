@@ -8,19 +8,34 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriverLooped;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShootCommand;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
+import static frc.robot.Constants.*;
 
-import java.awt.*;
+
 
 public class RobotContainer {
-    private final XboxController driverController = new XboxController(0);
+    private final XboxController driverController = new XboxController(DRIVER_CONTROLLER);
 
+    private final Drivetrain drivetrain = new Drivetrain();
+    private final Shooter shooter = new Shooter();
     // Test (This one should work!!)
 
+
+
     public RobotContainer() {
+        drivetrain.setDefaultCommand(new DriverLooped(drivetrain, driverController));
         configureBindings();
     }
 
     private void configureBindings() {
+        //Config for the Tank Drivetrain
 
+        //Config for the Shooter
+        new JoystickButton(driverController, Button.kRightBumper.value).whileTrue(new ShootCommand(shooter));
+        new JoystickButton(driverController, Button.kLeftBumper.value).whileTrue(new IntakeCommand(shooter));
     }
 }
