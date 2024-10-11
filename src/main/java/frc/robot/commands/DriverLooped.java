@@ -18,7 +18,7 @@ public class DriverLooped extends Command {
         // addRequirements() method (which takes a vararg of Subsystem)
         this.drivetrain = drivetrain;
         this.controller = controller;
-        addRequirements();
+        addRequirements(drivetrain);
     }
 
     /**
@@ -26,8 +26,6 @@ public class DriverLooped extends Command {
      */
     @Override
     public void initialize() {
-    leftStickY = controller.getLeftY();
-    rightStickY = controller.getRightY();
     }
     /**
      * The main body of a command.  Called repeatedly while the command is scheduled.
@@ -35,6 +33,9 @@ public class DriverLooped extends Command {
      */
     @Override
     public void execute() {
+        leftStickY = controller.getRawAxis(XboxController.Axis.kLeftY.value);
+        rightStickY = controller.getRawAxis(XboxController.Axis.kRightY.value);
+
         this.drivetrain.tankDrive(leftStickY, rightStickY);
 
 

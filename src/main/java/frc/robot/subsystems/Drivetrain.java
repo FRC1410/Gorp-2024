@@ -21,8 +21,8 @@ public class Drivetrain extends SubsystemBase {
     public Drivetrain(){
         leftBackMotor.follow(leftFrontMotor);
         rightBackMotor.follow(rightBackMotor);
-        leftBackMotor.setInverted(true);
-        leftFrontMotor.setInverted(true);
+        leftBackMotor.setInverted(false);
+        leftFrontMotor.setInverted(false);
     }
 
     public void tankDrive(double leftStickY, double rightStickX) {

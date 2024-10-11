@@ -12,12 +12,16 @@ public class Shooter {
     private final WPI_TalonSRX bottomShooter = new WPI_TalonSRX(BOTTOM_SHOOTER_ID);
 
     public Shooter(){
-        bottomShooter.follow(topShooter);
+
     }
 
     public void shooterSpeed(double topShooterSpeed){
         topShooter.set(topShooterSpeed);
+        bottomShooter.set(topShooterSpeed);
+    }
 
+    public void revTop(double topshooterSpeed) {
+        topShooter.set(topshooterSpeed);
     }
 
 }

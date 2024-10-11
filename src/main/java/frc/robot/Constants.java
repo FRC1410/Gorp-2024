@@ -12,6 +12,6 @@ public final class Constants {
     public final static int BOTTOM_SHOOTER_ID = 6;
 
     public static final int SHOOTER_CONSTANT = 1;
-    public static final int INTAKE_CONSTANT = 1;
+    public static final int INTAKE_CONSTANT = -1;
 
 }
