@@ -23,13 +23,13 @@ public class RobotContainer {
     private final Drivetrain drivetrain = new Drivetrain();
     private final Shooter shooter = new Shooter();
     // Test (This one should work!!)
+    //My bad for this one
 
 
 
     public RobotContainer() {
         drivetrain.setDefaultCommand(new DriverLooped(drivetrain, driverController));
-        configureBindings();
-        nigga fuck you
+
     }
 
     private void configureBindings() {
